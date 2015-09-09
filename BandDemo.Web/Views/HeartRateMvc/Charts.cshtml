@@ -1,0 +1,42 @@
+﻿@model IEnumerable<BandDemo.Web.Models.HeartRateData>
+
+@{
+    ViewBag.Title = "Charts";
+}
+
+<h2>Charts</h2>
+
+@*style="background-image: url(https://compass-ssl.surface.com/assets/e2/18/e218d606-bfb9-43c3-8ea0-fe68fc58addc.jpg#Desktop_Microsoft-Band-Full-Bleed.jpg);"*@
+
+<div class="chart-wrapper">
+    @(Html.Kendo().Chart()
+        .Name("chart")
+        .Title("Heart Rate values per time")
+        .Legend(legend => legend
+            .Position(ChartLegendPosition.Bottom)
+        )
+        .ChartArea(chartArea => chartArea
+            .Background("transparent")
+        )
+        .SeriesDefaults(seriesDefaults =>
+            seriesDefaults.Line().Style(ChartLineStyle.Smooth)
+        )
+        .Series(series =>
+        {
+            series.Line(@Model.Select(m => m.Value)).Name("Heart Rate");
+        })
+        .CategoryAxis(axis => axis
+            .Categories(@Model.Select(m => m.CreatedAt.Minute))
+            .MajorGridLines(lines => lines.Visible(false))
+        )
+        .ValueAxis(axis => axis
+            .Numeric()//.Labels(labels => labels.Format("{0}%"))
+            .Line(line => line.Visible(false))
+            .AxisCrossingValue(-10)
+        )
+        .Tooltip(tooltip => tooltip
+            .Visible(true)
+            .Format("{0} Heart Rate")
+        )
+    )
+</div>

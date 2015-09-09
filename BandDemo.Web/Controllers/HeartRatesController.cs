@@ -136,7 +136,7 @@ namespace BandDemo.Web.Controllers
         private async Task SendNotificationAsync(HeartRateData heartRateData)
         {
             NotificationHubClient hub = NotificationHubClient
-                .CreateClientFromConnectionString("Endpoint=sb://banddemonotificationhub-ns.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=8im4ijcsb95TOZ7uwSSLi/j9HIMEoTh6MdpVFsqyQNw=", 
+                .CreateClientFromConnectionString("to be done by you !", 
                 "banddemonotificationhub");
 
             var toast = @"<toast><visual><binding template=""ToastText01""><text id=""1"">" + heartRateData.Value + @"</text><text id=""2"">" + heartRateData.CreatedAt.Hour + ":" + heartRateData.CreatedAt.Minute + "</text></binding></visual></toast>";
